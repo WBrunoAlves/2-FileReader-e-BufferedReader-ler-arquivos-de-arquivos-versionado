@@ -5,31 +5,21 @@ import java.io.IOException;
 public class Program {
 
 	public static void main(String[] args) {
-		String path = "/home/wds/java-u/atividades/9-trabalhando-arquivos-java/1-lendo-arquivos-texto-com-classes-File-Scaner\n" + 
-				"in.txt";
-		BufferedReader br = null;
-		FileReader fr = null;
-		
-		try {
-			fr = new FileReader(path);
-			br = new BufferedReader(fr);
+		String path = "/home/wds/java-u/atividades/9-trabalhando-arquivos-java/2-FileReader-e-BufferedReader-ler-arquivos-de-arquivos-versionado/in.txt";
+	
+		/*melhoria tira o finally e coloca as instanciaçoes no bloco try*/
+		try (BufferedReader br = new BufferedReader(new FileReader(path))){
+			
 			String line = br.readLine();
 			while (line != null) {
 				System.out.println(line);
 				line = br.readLine();
 			}
-		} catch (IOException e) {
-			System.out.println("Error: " + e.getMessage());
-		} finally {
-			try {
-				if (br != null)
-					br.close();
-				if (fr != null)
-					fr.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
+		catch (IOException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		
 
 	}
 
